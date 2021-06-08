@@ -16,17 +16,19 @@
         <div id="contents">
       <% 
 		ArrayList<Term> main = (ArrayList<Term>)request.getAttribute("main");
+      	request.setAttribute("main", main);
+      	int i=0;
 		if(!main.isEmpty()) { %>
-				<% for(int i = 0; i < 6; i++){
+				<% for(i = 0; i < 6; i++){
 					Term term = main.get(i);	%>
 						 <article>
 						 <div><form action="connect.do" method="put">
-							<input id="maints" type="submit" name="<%=term.getTerm() %>" value="<%=term.getTerm() %>"/><br><br>
+							<input id="maints" type="submit" name="term" value="<%=term.getTerm() %>"/><br><br>
 								<textarea cols="35" rows="8" readonly><%=term.getTermcon() %></textarea>
 						 	</form>
           				</div>
           				</article>
-				<%	}
+				<%}
 			}else {
 				out.print("<h3>Error</h3>");
 			}

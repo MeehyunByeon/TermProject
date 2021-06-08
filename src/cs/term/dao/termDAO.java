@@ -216,4 +216,99 @@ public class termDAO {
 		return null;
 	}
 	
+	public String termcon(String term) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String termcon = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement(" select termcon from term where term=?;");
+			pstmt.setString(1, term);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+			{
+				termcon = rs.getString(1);
+			}
+		}catch(Exception e) {
+			System.out.print("Detail term Error"+e);
+		}finally
+		{
+			close(conn, pstmt, rs);
+		}
+		return termcon;
+	}
+	public boolean ysTerm(Storage yn) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = false;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("select * from storage where stmem=? and stterm=?;");
+			pstmt.setString(1, yn.getStmem());
+			pstmt.setString(2, yn.getStterm());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				result = true;
+			}
+			
+		}catch (Exception e) 
+		{
+			System.out.print("YN Store Error: "+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return result;
+		
+	}
+	
+	public String storeTerm(Storage store) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Storage st = null;
+		String result = null;
+		
+		try
+		{	
+			conn = connect();
+			pstmt = conn.prepareStatement("insert into storage(stmem, stterm) values(?,?);");
+			pstmt.setString(1, store.getStmem());
+			pstmt.setString(2, store.getStterm());
+			pstmt.executeUpdate();
+		}catch (Exception e) 
+		{
+			System.out.print("Store Error: "+e);
+		}finally {
+			close(conn, pstmt);
+		}
+		return result;
+	}
+	
+	
+	public void cancleTerm() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		Storage ss = new Storage();
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("delete from storage where stmem=? and stterm=?;");
+			pstmt.setString(1, ss.getStmem());
+			pstmt.setString(2, ss.getStterm());
+			pstmt.executeUpdate();
+		}catch (Exception e) 
+		{
+			System.out.print("Cancle term Error: "+e);
+		}finally {
+			close(conn, pstmt);
+		}
+	}
+	
 }

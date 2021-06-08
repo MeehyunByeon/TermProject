@@ -20,6 +20,8 @@ public class FrontController extends HttpServlet{
 		map.put("/join.do", new JoinController());
 		map.put("/update.do", new UpdateController());
 		map.put("/myinfo.do", new MyInfoController());
+		map.put("/connect.do", new ConnectController());
+		map.put("/store.do", new StoreController());
 	}
 	
 	@Override

@@ -7,14 +7,6 @@ public class Member {
 	private String tel;
 	private String email;
 	
-	public Member(String id, String pwd, String name, String tel, String email) {
-		this.id = id;
-		this.pwd = pwd;
-		this.name = name;
-		this.tel = tel;
-		this.email = email;
-	}
-	
 	public Member() {
 		super();
 	}

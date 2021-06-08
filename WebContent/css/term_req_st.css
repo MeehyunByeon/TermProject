@@ -99,14 +99,6 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
   background-color: #8FAADC;
 }
 
-#contents {
-	float: left; 
-	width: 1400px; 
-	height: 750px; 
-	background: white;
-	border-radius: 3px;
-}
-
 #footer {
 	float: left; 
 	width: 1400px; 
@@ -139,7 +131,7 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
 /*seeTerm*/
 #researchText{
   width: 400px;
-  height: 35px;
+  height: 40px;
   border: 3px solid #DAE3F3;
   margin: 40px 0 40px;
   border-radius: 5px;
@@ -147,7 +139,7 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
 
 #researchSubmit{
   width: 90px;
-  height: 35px;
+  height: 46px;
   color: black;
   border: none;
   background-color: #DAE3F3;
@@ -160,18 +152,17 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
   color:white;
 }
 
-#contents h1 {
-  margin: 40px;
-}
 article a{
   font-size: 25px;
 }
 article textarea{
+  width: 1100px;
+  height: 400px;
   border: none;
-   font-size: 18px;
-   resize: none;
+   font-size: 20px;
    overflow:hidden;
    line-height:30px;
+   padding-top: 30px;
 }
 article textarea:focus {
  outline: none;
@@ -211,12 +202,60 @@ article{
     border: 2px solid #DAE3F3;
 }
 
+.contents {
+	float: left; 
+	width: 1400px; 
+	height: 750px; 
+	background: white;
+	border-radius: 3px;
+}
+
+.contents h1 {
+  margin: 30px;
+  width: 1200px;
+}
+.contents a{
+  background-color: #DAE3F3;
+  border: 2px #DAE3F3 solid;
+  border-radius: 3px;
+  padding: 10px;
+  width: 30px;
+  height: 20px;
+
+  float: left;
+  margin-left: 130px;
+  margin-top: 70px;
+  margin-bottom: 10px;
+}
+
+.contents a:last-of-type{
+  float: right;
+  margin-right: 130px;
+  margin-top: -30px;
+}
+
+#inst input[type=submit]{
+  border: 2px solid #DAE3F3;
+  background-color: #DAE3F3;
+  border-radius: 5px;
+  display: block;
+  font-size: 15px;
+  letter-spacing: 1px;
+  margin: 40px auto;
+  padding: 5px 15px;
+  width: 180px;
+  height: 50px;
+}
+#inst input[type=submit]:hover { 
+  background-color:#8FAADC;
+  color:white;
+}
 
 #detail{
       float:left;
       width:1200px;
       height:500px; 
-      margin:25px 90px 25px;
+      margin: 0px 90px 25px;
       padding:10px; 
       border:3px solid #DAE3F3;
       border-radius: 5px;

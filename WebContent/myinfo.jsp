@@ -12,7 +12,7 @@
     <div id="wrap">
     	<%@ include file="/header.jsp" %>
     	
-    <div id="contents">
+   	<div id="contents">
       <section>
       <form id="join" action="update.do" method="post">
         <fieldset><h1>MY</h1></fieldset>

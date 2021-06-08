@@ -107,6 +107,11 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
 	border-radius: 3px;
 }
 
+#contents h1 {
+  margin: 30px;
+  width: 1200px;
+}
+
 #footer {
 	float: left; 
 	width: 1400px; 

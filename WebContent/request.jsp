@@ -11,7 +11,7 @@
     <div id="wrap">
     	<%@ include file="/header.jsp" %>
 
-        <div id="contents">CONTENTS</div>
+        <div class="contents">CONTENTS</div>
         
         <%@ include file="/footer.jsp" %>
 

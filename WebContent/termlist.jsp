@@ -11,7 +11,7 @@
     <div id="wrap">
     	<%@ include file="/header.jsp" %>
 
-        <div id="contents">
+        <div class="contents">
         <form>
           <input id="researchText" type="text" name="research">
           <input id="researchSubmit" type="submit" value="검색"></input>
