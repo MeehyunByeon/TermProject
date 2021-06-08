@@ -13,35 +13,34 @@ public class StoreController implements Controller {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String stterm = request.getParameter("sterm");
+		String choice = request.getParameter("choice");
+		String term = request.getParameter("term");
 		String sessionId = (String)request.getSession().getAttribute("sessionId");
 		String path = null;
-		
 		
 		if(sessionId != null)
 		{
 			Storage store = new Storage();
 			store.setStmem(sessionId);
-			store.setStterm(stterm);
+			store.setStterm(term);
 			termService s = termService.getInstance();
 			path = "/termResult/storeSuccess.jsp";
 			
-			if(stterm.equals("cancel")){
-				s.cancleTerm();
+			if(choice.equals("cancle")){
+				s.cancleTerm(store);
 				request.setAttribute("result", "저장 취소");
-				request.setAttribute("msg", stterm+"용어 저장 취소에 성공했습니다.");
+				request.setAttribute("msg", "용어 [" +term+ "] 저장 취소에 성공했습니다.");
 			}
 
 			else {
-				String r = s.storeTerm(store);
-				if(r!=null) {
-					String rr = s.storeTerm(store);
-					request.setAttribute("result", "저장 결과");
-					request.setAttribute("msg", rr);
-				}
-				else if(r==null){
+				boolean r = s.storeTerm(store);
+				if(r==true) {
 					request.setAttribute("result", "저장 성공");
 					request.setAttribute("msg", "용어 저장에 성공했습니다");
+				}
+				else {
+					request.setAttribute("result", "저장 결과");
+					request.setAttribute("msg", r);
 				}
 			}
 			

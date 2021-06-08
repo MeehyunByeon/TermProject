@@ -8,18 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
- <div id="wrap"> <%@ include file="/header.jsp" %>
+<div id="wrap"> <%@ include file="/header.jsp" %>
 	<div id="contents">
         <section>
         <div id="log">
           <fieldset>
-          <legend>${result }</legend>
-          	<p>${msg }</p>
-           	<form id="log" action="allterm.do" method="post">
-            	<input type="submit" value="용어 목록">
+          <legend>보관함이 존재하지 않음</legend>
+          	<p>${msg }</p><br>
+           	<form id="log" action="login.jsp" method="post">
+            	<input type="submit" value="로그인">
             </form>
-            <form id="log" action="storage.do" method="post">
-           		<input type="submit" value="보관함">
+            <form id="log" action="join.jsp" method="post">
+           		<input type="submit" value="회원가입">
           	</form>
           </fieldset>
           </div>

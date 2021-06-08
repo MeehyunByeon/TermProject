@@ -44,31 +44,34 @@ public class termService {
 		return meminfo;
 	}
 
-	public String termcon(String term) {
-		String termcon = dao.termcon(term);
-		return termcon;
+	public Term terms(String term) {
+		Term terms = dao.terms(term);
+		return terms;
 	}
 	
-	public boolean ynterm(Storage yn) {
-		boolean result = ynterm(yn);
-		return result;
+	public boolean ynTerm(Storage yn) {
+		return dao.ynTerm(yn);
 	}
 	
-	public String storeTerm(Storage store){
-		String result = dao.storeTerm(store);
-		return result;
-	}
-
-	public void memberDelete(String id, String pwd)
-	{
-		dao.memberDelete(id, pwd);
+	public boolean storeTerm(Storage store){
+		boolean r = dao.storeTerm(store);
+		return r;
 	}
 	
 	public ArrayList<Term> termListAll() {
 		return dao.termListAll();
 	}
 	
-	public void cancleTerm() {
-		dao.cancleTerm();
+	public void cancleTerm(Storage cancle) {
+		dao.cancleTerm(cancle);
+	}
+
+	public ArrayList<Term> storage(String sessionId) {
+		return dao.storage(sessionId);
+	}
+	
+	public void memberDelete(String id, String pwd)
+	{
+		dao.memberDelete(id, pwd);
 	}
 }

@@ -17,9 +17,9 @@
 
         <div id="nav">
         <ul>
-   	    	<li><a href="termlist.jsp">용어</a></li>
-        	<li><a href="storage.jsp">보관함</a></li>
-        	<li><a href="request.jsp">요청</a></li>
+   	    	<li><a href="allterm.do">용어</a></li>
+        	<li><a href="storage.do">보관함</a></li>
+        	<li><a href="request.do">요청</a></li>
         	<%String sessionId = (String)request.getSession().getAttribute("sessionId"); 
 				if(sessionId != null){	        	
         	%>

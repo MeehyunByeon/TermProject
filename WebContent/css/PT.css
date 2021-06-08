@@ -18,7 +18,7 @@ a:link, a:visited{
 
 
 ul {
-  list-style: none;
+   list-style:none;
 }
 
 body {
@@ -42,7 +42,7 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
 #wrap {
     width: 1400px;
    	height: 100px;
- 	  margin: 0 auto; 
+ 	margin: 0 auto; 
     color: #222;
     background-color: #DAE3F3;
     text-align: center;

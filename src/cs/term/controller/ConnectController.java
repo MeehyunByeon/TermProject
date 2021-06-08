@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cs.term.service.termService;
 import cs.term.vo.Storage;
+import cs.term.vo.Term;
 
 public class ConnectController implements Controller {
 
@@ -17,17 +18,19 @@ public class ConnectController implements Controller {
 		String sessionId = (String)request.getSession().getAttribute("sessionId");
 		
 		termService s = termService.getInstance();
-		String termcon = s.termcon(term);
+		Term terms = s.terms(term);
 		
 		Storage yn = new Storage();
 		yn.setStmem(sessionId);
 		yn.setStterm(term);
-		boolean r = s.ynterm(yn);
+		boolean r = s.ynTerm(yn);
+		String rr = null;
 		if(r == true)
-			request.setAttribute("yn", r);
+			rr = "존재";
+			request.setAttribute("rr", rr);
 		
 		request.setAttribute("term", term);
-		request.setAttribute("termcon", termcon);
+		request.setAttribute("terms", terms);
 		HttpUtil.forward(request, response, "/detailterm.jsp");
 	}
 

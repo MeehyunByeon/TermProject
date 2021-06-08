@@ -201,36 +201,54 @@ public class termDAO {
 		}
 		return meminfo;
 	}
-	
-	public Term termSearch(String search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public void memberDelete(String id, String pwd) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	public ArrayList<Term> termListAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public String termcon(String term) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String termcon = null;
+		Term term = null;
+		ArrayList<Term> all = new ArrayList<Term>();
 		
 		try
 		{
 			conn = connect();
-			pstmt = conn.prepareStatement(" select termcon from term where term=?;");
+			pstmt = conn.prepareStatement("select * from term;");
+			rs = pstmt.executeQuery();
+			while (rs.next()) 
+			{
+				term = new Term();
+				term.setTerm(rs.getString(1));
+				term.setTermcon(rs.getString(2));
+				term.setTermcate(rs.getString(3));
+				term.setTermdate(rs.getString(4));
+				all.add(term);
+			}
+		}catch (Exception e) 
+		{
+			System.out.print("Term list All Error"+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return all;
+	}
+	
+	public Term terms(String term) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Term terms = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement(" select termcon, termcate from term where term=?;");
 			pstmt.setString(1, term);
 			rs = pstmt.executeQuery();
 			if(rs.next())
 			{
-				termcon = rs.getString(1);
+				terms = new Term();
+				terms.setTermcon(rs.getString(1));
+				terms.setTermcate(rs.getString(2));
 			}
 		}catch(Exception e) {
 			System.out.print("Detail term Error"+e);
@@ -238,9 +256,10 @@ public class termDAO {
 		{
 			close(conn, pstmt, rs);
 		}
-		return termcon;
+		return terms;
 	}
-	public boolean ysTerm(Storage yn) {
+	
+	public boolean ynTerm(Storage yn) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -268,12 +287,10 @@ public class termDAO {
 		
 	}
 	
-	public String storeTerm(Storage store) {
+	public boolean storeTerm(Storage store) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Storage st = null;
-		String result = null;
+		boolean result = false;
 		
 		try
 		{	
@@ -282,9 +299,10 @@ public class termDAO {
 			pstmt.setString(1, store.getStmem());
 			pstmt.setString(2, store.getStterm());
 			pstmt.executeUpdate();
+			result = true;
 		}catch (Exception e) 
 		{
-			System.out.print("Store Error: "+e);
+			System.out.print("Store Term Error: "+e);
 		}finally {
 			close(conn, pstmt);
 		}
@@ -292,16 +310,16 @@ public class termDAO {
 	}
 	
 	
-	public void cancleTerm() {
+	public void cancleTerm(Storage cancle) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		Storage ss = new Storage();
+
 		try
 		{
 			conn = connect();
 			pstmt = conn.prepareStatement("delete from storage where stmem=? and stterm=?;");
-			pstmt.setString(1, ss.getStmem());
-			pstmt.setString(2, ss.getStterm());
+			pstmt.setString(1, cancle.getStmem());
+			pstmt.setString(2, cancle.getStterm());
 			pstmt.executeUpdate();
 		}catch (Exception e) 
 		{
@@ -309,6 +327,49 @@ public class termDAO {
 		}finally {
 			close(conn, pstmt);
 		}
+	}
+	
+	public ArrayList<Term> storage(String sessionId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Term t = null;
+		ArrayList<Term> myst = new ArrayList<Term>();
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("select term, termcon, termcate, termdate from term, storage where storage.stmem=? and storage.stterm = term.term;");
+			pstmt.setString(1, sessionId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) 
+			{
+				t = new Term();
+				t.setTerm(rs.getString(1));
+				t.setTermcon(rs.getString(2));
+				t.setTermcate(rs.getString(3));
+				t.setTermdate(rs.getString(4));
+				myst.add(t);
+			}
+			
+		}catch (Exception e) 
+		{
+			System.out.print("Storage Error: "+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return myst;
+	}
+	
+	public Term termSearch(String search) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void memberDelete(String id, String pwd) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

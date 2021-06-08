@@ -11,22 +11,25 @@
 <body>
 	<%	
 		String term = (String)request.getAttribute("term");
-		String termcon = (String)request.getAttribute("termcon");
-		boolean yn = (boolean)request.getAttribute("yn");
+		Term terms = (Term)request.getAttribute("terms");
+		String yn = (String)request.getAttribute("rr");
 	%>
     <div id="wrap"> <%@ include file="/header.jsp" %>
         <div class="contents">
-        <a href="termlist.jsp">목록</a>  <h1><%=term%></h1>    <a href="main.do">메인</a>
+        <a href="allterm.do">목록</a>  <h1>[ <%= term%> ]</h1>  <a href="main.do">메인</a>
+        <h2><%= terms.getTermcate()%></h2>
         <article id="detail">
-            <textarea cols="20" readonly><%=termcon%></textarea>
+            <textarea cols="20" readonly><%= terms.getTermcon()%></textarea>
           </article>
+          
           <form id="inst" action="store.do" method="put">
-        	<%if(yn == true){ %>
-        		<input type="hidden" name="sterm" value="cancle">
-        		<input type="submit" name="store" value="저장 취소">
+          	<input type="hidden" name="term" value="<%= term%>">
+          	
+        	<%if(yn != null){ %>
+        		<input type="hidden" name="choice" value="cancle">
+        		<input type="submit" value="저장 취소">
             <%}else{%>
-              	<input type="hidden" name="sterm" value="<%=term%>">
-              	<input type="submit" name="store" value="내 보관함에 담기">
+              	<input type="submit" name="choice" value="내 보관함에 담기">
       		<%}%>        
       		</form>
         </div>

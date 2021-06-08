@@ -16,12 +16,19 @@ public class FrontController extends HttpServlet{
 	public void init(ServletConfig config) throws ServletException {
 		map = new HashMap<String, Controller>();
 		map.put("/main.do", new MainpageController());
+		
+		// term
+		map.put("/connect.do", new ConnectController());
+		map.put("/store.do", new StoreController());
+		map.put("/allterm.do", new AlltermController());
+		map.put("/storage.do", new StorageController());
+		map.put("/request.do", new RequestController());
+		
+		// member
 		map.put("/login.do", new LoginController());
 		map.put("/join.do", new JoinController());
 		map.put("/update.do", new UpdateController());
 		map.put("/myinfo.do", new MyInfoController());
-		map.put("/connect.do", new ConnectController());
-		map.put("/store.do", new StoreController());
 	}
 	
 	@Override
