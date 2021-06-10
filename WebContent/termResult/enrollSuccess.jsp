@@ -8,18 +8,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div id="wrap"> <%@ include file="/header.jsp" %>
+ <div id="wrap"> <%@ include file="/header.jsp" %>
 	<div id="contents">
         <section>
         <div id="log">
           <fieldset>
-          <legend>${result}</legend>
-          	<p>${msg }</p><br>
-           	<form id="log" action="login.jsp" method="post">
-            	<input type="submit" value="로그인">
+          <legend>${result }</legend>
+          	<p>${msg }</p>
+           	<form id="log" action="allterm.do" method="post">
+            	<input type="submit" value="용어 목록">
             </form>
-            <form id="log" action="join.jsp" method="post">
-           		<input type="submit" value="회원가입">
+            <form id="log" action="main.do" method="post">
+           		<input type="submit" value="메인으로">
+          	</form>
+          	<form id="log" action="myinfo.do" method="post">
+           		<input type="submit" value="MY">
           	</form>
           </fieldset>
           </div>

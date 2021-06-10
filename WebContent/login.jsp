@@ -13,8 +13,8 @@
 
 
         <div id="contents">
-        <section>
-          <form id="log" action="login.do" method="post">
+        <section id="log">
+          <form action="login.do" method="post">
           <fieldset>
           <legend>로그인</legend>
           <ul>
@@ -28,11 +28,14 @@
             </li>
            </ul>
            <div id="logsub">
-            <a href="findIdPwd.jsp">아이디 | 비밀번호 찾기</a> <a href="join.jsp">회원가입</a>
+            <a href="findIdPwd.jsp">아이디 | 비밀번호 찾기</a>
            </div>
             <input type="submit" value="로그인">
           </fieldset>
           </form>
+          
+          <form action="join.jsp" method="put"><input type="submit" value="회원가입"></form>
+          <form action="main.do" method="put"><input type="submit" value="메인으로"></form>
         </section>          
         </div>
 

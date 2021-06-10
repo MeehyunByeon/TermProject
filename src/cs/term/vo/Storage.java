@@ -1,21 +1,12 @@
 package cs.term.vo;
 
 public class Storage {
-	private String stid;
 	private String stmem;
 	private String stterm;
 	private String stdate;
 	
 	public Storage() {
 		super();
-	}
-
-	public String getStid() {
-		return stid;
-	}
-
-	public void setStid(String stid) {
-		this.stid = stid;
 	}
 
 	public String getStmem() {

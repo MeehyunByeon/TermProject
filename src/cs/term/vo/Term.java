@@ -1,19 +1,24 @@
 package cs.term.vo;
 
 public class Term {
+	private String termmem;
 	private String term;
 	private String termcon;
 	private String termcate;
 	private String termdate;
+	private int termhits;
 	
 	public Term() {
 		super();
 	}
-	public Term(String term, String termcon) {
-		this.term = term;
-		this.termcon = termcon;
+	
+	public String getTermmem() {
+		return termmem;
 	}
-
+	public void setTermmem(String termmem) {
+		this.termmem = termmem;
+	}
+	
 	public String getTerm() {
 		return term;
 	}
@@ -44,6 +49,13 @@ public class Term {
 
 	public void setTermdate(String termdate) {
 		this.termdate = termdate;
+	}
+
+	public int getTermhits() {
+		return termhits;
+	}
+	public void setTermhits(int termhits) {
+		this.termhits = termhits;
 	}
 	
 	

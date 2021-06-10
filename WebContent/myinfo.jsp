@@ -15,7 +15,7 @@
    	<div id="contents">
       <section>
       <form id="join" action="update.do" method="post">
-        <fieldset><h1>MY</h1></fieldset>
+        <fieldset>MY</fieldset>
       	<fieldset>
       	<legend>회원 정보</legend>
         <ul>

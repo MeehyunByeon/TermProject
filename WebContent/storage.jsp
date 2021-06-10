@@ -20,17 +20,19 @@
       	int i=0;
 		if(!myst.isEmpty()) { %>
 			<div id="listWrapper">
+				<h1>보관함</h1>
 				<table id="table">
-          				<tr><th>번호</th><th>용어</th><th>카테고리</th><th>날짜</th><th>조회수</th></tr>
+          				<tr><th>번호</th><th>용어</th><th>카테고리</th><th>날짜</th><th>조회수</th><th>등록자</th></tr>
 				<% for(i = 0; i < myst.size(); i++){
 					Term t = myst.get(i);	%>
 					<tr><form action="connect.do" method="put">
 						 	<input type="hidden" name="term" value="<%=t.getTerm() %>">
 						 	<td><%= i+1%></td>
-						 	<td><input id="" type="submit" name="term" value="<%=t.getTerm() %>"/></td>
-							<td><input id="" type="submit" name="term" value="<%=t.getTermcate() %>"/></td>
-							<td><input id="" type="submit" name="term" value="<%=t.getTermdate() %>"/></td>
-							<td><input id="" type="submit" name="term" value="hits"/></td>
+						 	<td><input type="submit" name="term" value="<%=t.getTerm() %>"/></td>
+							<td><input type="submit" name="term" value="<%=t.getTermcate() %>"/></td>
+							<td><%=t.getTermdate() %></td>
+							<td><%=t.getTermhits() %></td>
+							<td><%=t.getTermmem() %></td>
 					</form></tr>
 				<% }
 		} else out.print("<h3>Error</h3>");%>

@@ -29,11 +29,6 @@ public class termService {
 		dao.memberJoin(member);
 	}
 	
-	public Term termSearch(String search){
-		Term term = dao.termSearch(search);
-		return term;
-	}
-	
 	public void memberUpdate(Member member)
 	{
 		dao.memberUpdate(member);
@@ -69,9 +64,21 @@ public class termService {
 	public ArrayList<Term> storage(String sessionId) {
 		return dao.storage(sessionId);
 	}
-	
-	public void memberDelete(String id, String pwd)
-	{
-		dao.memberDelete(id, pwd);
+
+	public ArrayList<Term> researchTerms(String researchTerm) {
+		return dao.researchTerms(researchTerm);
 	}
+
+	public void enrollTerm(Term eterm) {
+		dao.enrollTerm(eterm);
+	}
+
+	public ArrayList<Request> myreq(String sessionId) {
+		return dao.myreq(sessionId);
+	}
+
+	public ArrayList<Request> allreq() {
+		return dao.allreq();
+	}
+
 }

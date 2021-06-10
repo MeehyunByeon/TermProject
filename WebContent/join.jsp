@@ -14,7 +14,7 @@
     <div id="contents">
       <section>
       <form id="join" action="join.do" method="post">
-        <fieldset><h1>회원가입</h1></fieldset>
+        <fieldset>회원가입</fieldset>
       	<fieldset>
       	<legend>회원정보</legend>
         <ul>

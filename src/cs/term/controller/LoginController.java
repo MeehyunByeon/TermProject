@@ -17,12 +17,12 @@ public class LoginController implements Controller {
 		String pwd = request.getParameter("pwd");
 		String path = null;
 		boolean result=false;
-		
+
+
 		termService s = termService.getInstance();
 		result = s.memberLogin(id, pwd);
-		
-		if(result)
-		{
+			
+		if(result) {
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionId", id);
 			path = "main.do";
@@ -31,7 +31,6 @@ public class LoginController implements Controller {
 			path = "/termResult/loginfail.jsp";
 			request.setAttribute("msg", "아이디나 비밀번호가 올바르지 않습니다. 다시 시도해주세요.");
 		}
-
 		HttpUtil.forward(request, response, path);
 	}
 

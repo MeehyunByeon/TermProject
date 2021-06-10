@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.jar.Attributes.Name;
 
 import cs.term.vo.Member;
 import cs.term.vo.Term;
@@ -68,6 +67,43 @@ public class termDAO {
 		}
 	}
 	
+	public void reqUpdate()
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String rt = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("alter table req auto_increment=1;"
+					+ "set @count=0;"
+					+ "update req set req.reqid = @count:=@count+1;");
+			pstmt = conn.prepareStatement("select reqterm from req;");
+			rs = pstmt.executeQuery();
+			while (rs.next())
+			{
+				rt = rs.getString(1);
+				pstmt = conn.prepareStatement("select term from term where term=?;");
+				pstmt.setString(1, rt);
+				rs = pstmt.executeQuery();
+				if(rt.equals(rs)) {
+					pstmt = conn.prepareStatement("delete from req where reqterm=?;");
+					pstmt.setString(1, rt);
+				}
+				
+			}
+
+		}catch (Exception e) 
+		{
+			System.out.print("Req Update Error"+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+	}
+	
 	public ArrayList<Term> mainTermlist() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -125,6 +161,7 @@ public class termDAO {
 		}
 		return result;
 	}
+	
 	public void memberJoin(Member member) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -206,7 +243,7 @@ public class termDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Term term = null;
+		Term t = null;
 		ArrayList<Term> all = new ArrayList<Term>();
 		
 		try
@@ -216,12 +253,14 @@ public class termDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) 
 			{
-				term = new Term();
-				term.setTerm(rs.getString(1));
-				term.setTermcon(rs.getString(2));
-				term.setTermcate(rs.getString(3));
-				term.setTermdate(rs.getString(4));
-				all.add(term);
+				t = new Term();
+				t.setTermmem(rs.getString(1));
+				t.setTerm(rs.getString(2));
+				t.setTermcon(rs.getString(3));
+				t.setTermcate(rs.getString(4));
+				t.setTermdate(rs.getString(5));
+				t.setTermhits(rs.getInt(6));
+				all.add(t);
 			}
 		}catch (Exception e) 
 		{
@@ -339,17 +378,20 @@ public class termDAO {
 		try
 		{
 			conn = connect();
-			pstmt = conn.prepareStatement("select term, termcon, termcate, termdate from term, storage where storage.stmem=? and storage.stterm = term.term;");
+			pstmt = conn.prepareStatement("select termmem, term, termcon, termcate, termdate, termhits "
+					+ "from term, storage where storage.stmem=? and storage.stterm = term.term;");
 			pstmt.setString(1, sessionId);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) 
 			{
 				t = new Term();
-				t.setTerm(rs.getString(1));
-				t.setTermcon(rs.getString(2));
-				t.setTermcate(rs.getString(3));
-				t.setTermdate(rs.getString(4));
+				t.setTermmem(rs.getString(1));
+				t.setTerm(rs.getString(2));
+				t.setTermcon(rs.getString(3));
+				t.setTermcate(rs.getString(4));
+				t.setTermdate(rs.getString(5));
+				t.setTermhits(rs.getInt(6));
 				myst.add(t);
 			}
 			
@@ -362,14 +404,116 @@ public class termDAO {
 		return myst;
 	}
 	
-	public Term termSearch(String search) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Term> researchTerms(String researchTerm){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Term term = null;
+		ArrayList<Term> rterms = new ArrayList<Term>();
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("select * from term where term=? or term like '%?%' or term like '?%' or term like '%?';");
+			pstmt.setString(1, researchTerm);
+			rs = pstmt.executeQuery();
+			while (rs.next()) 
+			{
+				term = new Term();
+				term.setTermmem(rs.getString(1));
+				term.setTerm(rs.getString(2));
+				term.setTermcon(rs.getString(3));
+				term.setTermcate(rs.getString(4));
+				term.setTermdate(rs.getString(5));
+				term.setTermhits(rs.getInt(6));
+				rterms.add(term);
+			}
+		}catch (Exception e) 
+		{
+			System.out.print("Search Term Error"+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return rterms;
+	}
+	public void enrollTerm(Term eterm) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("insert into term(termmem, term, termcon, termcate) values(?,?,?,?);");
+			pstmt.setString(1, eterm.getTermmem());
+			pstmt.setString(2, eterm.getTerm());
+			pstmt.setString(3, eterm.getTermcon());
+			pstmt.setString(4, eterm.getTermcate());
+			pstmt.executeUpdate();
+		}catch (Exception e) 
+		{
+			System.out.print("Enroll Error: "+e);
+		}finally {
+			close(conn, pstmt);
+		}
+	}
+	public ArrayList<Request> myreq(String sessionId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Request req = null;
+		ArrayList<Request> myreq = new ArrayList<Request>();
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("select reqterm, reqdate from req where reqmem=?;");
+			pstmt.setString(1, sessionId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) 
+			{
+				req = new Request();
+				req.setReqterm(rs.getString(1));
+				req.setReqdate(rs.getString(2));
+				myreq.add(req);
+			}
+		}catch (Exception e) 
+		{
+			System.out.print("My req Error"+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return myreq;
 	}
 	
-	public void memberDelete(String id, String pwd) {
-		// TODO Auto-generated method stub
+	public ArrayList<Request> allreq() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Request req = null;
+		ArrayList<Request> allreq = new ArrayList<Request>();
 		
+		try
+		{
+			conn = connect();
+			reqUpdate();
+			pstmt = conn.prepareStatement("select * from req;");
+			rs = pstmt.executeQuery();
+			while (rs.next()) 
+			{
+				req = new Request();
+				req.setReqid(rs.getString(1));
+				req.setReqmem(rs.getString(2));
+				req.setReqterm(rs.getString(3));
+				req.setReqdate(rs.getString(4));
+				allreq.add(req);
+			}
+		}catch (Exception e) 
+		{
+			System.out.print("All req Error"+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return allreq;
 	}
 	
 }

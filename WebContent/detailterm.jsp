@@ -18,9 +18,7 @@
         <div class="contents">
         <a href="allterm.do">목록</a>  <h1>[ <%= term%> ]</h1>  <a href="main.do">메인</a>
         <h2><%= terms.getTermcate()%></h2>
-        <article id="detail">
             <textarea cols="20" readonly><%= terms.getTermcon()%></textarea>
-          </article>
           
           <form id="inst" action="store.do" method="put">
           	<input type="hidden" name="term" value="<%= term%>">

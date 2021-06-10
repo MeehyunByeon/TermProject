@@ -20,6 +20,7 @@ public class StorageController implements Controller {
 		if(sessionId==null)
 		{
 			path = "/termResult/toStorageFail.jsp";
+			request.setAttribute("result", "보관함이 존재하지 않음");
 			request.setAttribute("msg", "보관함 이용은 회원만 가능하오니 로그인 또는 회원가입을 해주세요.");
 		}
 		else{

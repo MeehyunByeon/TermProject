@@ -23,6 +23,8 @@ public class FrontController extends HttpServlet{
 		map.put("/allterm.do", new AlltermController());
 		map.put("/storage.do", new StorageController());
 		map.put("/request.do", new RequestController());
+		map.put("/research.do", new ResearchController());
+		map.put("/enroll.do", new EnrollController());
 		
 		// member
 		map.put("/login.do", new LoginController());
