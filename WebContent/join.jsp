@@ -45,9 +45,9 @@
         <label for="agree">이용약관동의
         <input type="checkbox" name="agree" required></label>
         <label for="mail_y">메일 수신 
-        <input type="radio" name="mailing" id="maili_y"> </label>
+        <input type="radio" name="mailing" value="mail_y" checked> </label>
         <label for="mail_n">메일 수신 안 함  
-        <input type="radio" name="mailing" id="maili_n" checked></label>     
+        <input type="radio" name="mailing" value="mail_n" ></label>     
       </fieldset>
       <fieldset>
         <button type="submit"> 회원가입 </button> 

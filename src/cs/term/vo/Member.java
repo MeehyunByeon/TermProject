@@ -6,6 +6,7 @@ public class Member {
 	private String name;
 	private String tel;
 	private String email;
+	private String mailing;
 	
 	public Member() {
 		super();
@@ -50,6 +51,13 @@ public class Member {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public String getMailing() {
+		return mailing;
+	}
+
+	public void setMailing(String mailing) {
+		this.mailing = mailing;
+	}
 	
 }

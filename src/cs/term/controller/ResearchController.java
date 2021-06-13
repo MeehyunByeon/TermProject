@@ -30,10 +30,12 @@ public class ResearchController implements Controller {
 				request.setAttribute("msg", "용어 등록은 회원만 가능하오니 로그인 또는 회원가입을 해주세요.");
 				path = "/termResult/toStorageFail.jsp";
 			}
-			else
-				if(term != null) request.setAttribute("term", term);
+			else if(term != null || present!=null) { 
+				request.setAttribute("term", term);
 				path = "/enroll.jsp";
+			}
 		}
+		
 		else if(enroll == null && research != null)
 		{
 			research = s.researchTerms(researchTerm);

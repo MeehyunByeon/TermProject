@@ -18,6 +18,9 @@ public class JoinController implements Controller {
 		String name = request.getParameter("name");
 		String tel = request.getParameter("tel");
 		String email = request.getParameter("email");
+		String mailing = request.getParameter("mailing");
+		if(mailing.equals("mail_y")) mailing = "Y";
+		else if(mailing.equals("mail_n")) mailing = "N";
 		
 		Member member = new Member();
 		member.setId(id);
@@ -25,8 +28,8 @@ public class JoinController implements Controller {
 		member.setName(name);
 		member.setTel(tel);
 		member.setEmail(email);
+		member.setMailing(mailing);
 		
-		// service
 		termService s = termService.getInstance();
 		s.memberJoin(member);
 		

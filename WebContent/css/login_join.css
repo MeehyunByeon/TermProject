@@ -33,21 +33,21 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
   width: 250px;
   border: 2px solid #DAE3F3;
 }
-
-#wrap {
+*#wrap {
     width: 1400px;
-   	height: 100px;
  	margin: 0 auto; 
     color: #222;
     background-color: #DAE3F3;
-    text-align: center;
+    text-align:center;
 }
+
 #contents {
 	float: left; 
 	width: 1400px; 
 	height: 750px; 
 	background: white;
 	border-radius: 3px;
+	border: none;
 }
 
 #contents h1 {
@@ -67,7 +67,7 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
     
 #log fieldset {
   border: 2px solid #DAE3F3;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   padding-bottom: 10px;
   border-radius: 5px;
 }
@@ -105,7 +105,7 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
   display: block;
   font-size: 20px;
   letter-spacing: 1px;
-  margin: 40px auto;
+  margin: 20px auto;
   padding: 7px 25px;
   width: 350px;
   height: 50px;
@@ -136,7 +136,6 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
 #join fieldset {
   border: 2px solid #DAE3F3;
   text-align: center;
-  margin-bottom: 5px;
   padding-bottom: 10px;
   border-radius: 5px;
 }
@@ -197,4 +196,87 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
 #join button:hover, input[type=submit]:hover{ 
   background-color:#8FAADC;
   color:white;
+}
+
+/*회원정보*/
+#myinfo {
+ border:3px solid #DAE3F3;
+	float:right;
+      width:650px;
+      height:700px; 
+      margin: 10px;
+      padding:10px; 
+      border-radius: 5px;
+}
+
+#myenroll{
+	border:3px solid #DAE3F3;
+	float:right;
+      width:650px;
+      height:700px; 
+      margin: 10px;
+      padding:10px; 
+      border-radius: 5px;
+      overflow: auto;
+    scrollbar-face-color:#8FAADC;
+    scrollbar-track-color:#DAE3F3;
+}
+#myenroll:first-of-type{
+	float: left
+}
+#myenroll h2{
+	margin-left: -20px;
+}
+
+#table_myenroll {
+	width: 640px;
+	height: 500px;
+	margin-top :0px;
+	border: 2px solid #DAE3F3;
+}
+#table_myenroll caption{
+	font-size: 20px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+#table_myenroll tr{
+    height:30px;
+    text-align: center;
+    line-height:30px;
+}
+#table_myenroll tr:first-of-type{
+    font-size:16px;
+    height:30px;
+    text-align: center;
+    line-height:30px;
+    background-color: #DAE3F3;
+}
+#table_myenroll input[type=submit]{
+	background-color: white;
+	border: none;
+	font-size:16px;
+	padding: 8px;
+	width: 50px;
+}
+
+#table_myenroll input[type=submit]:hover { 
+  background-color:#8FAADC;
+  color:white;
+}
+
+#table_myenroll > td-1{
+	width:10%;
+}
+#table_myenroll > td-2{
+	width:20%;
+} 
+#table_myenroll > td-3{
+	width:15%;
+}
+#table_myenroll > td-4{
+	width:25%;
+}
+#table_myenroll > td-5{
+	width:10%;
 }

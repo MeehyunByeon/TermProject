@@ -1,5 +1,6 @@
 package cs.term.dao;
 
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -67,43 +68,19 @@ public class termDAO {
 		}
 	}
 	
-	public void reqUpdate()
+	public void close(Connection conn, PreparedStatement pstmt, Statement stmt)
 	{
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String rt = null;
-		
-		try
+		if(stmt != null)
 		{
-			conn = connect();
-			pstmt = conn.prepareStatement("alter table req auto_increment=1;"
-					+ "set @count=0;"
-					+ "update req set req.reqid = @count:=@count+1;");
-			pstmt = conn.prepareStatement("select reqterm from req;");
-			rs = pstmt.executeQuery();
-			while (rs.next())
-			{
-				rt = rs.getString(1);
-				pstmt = conn.prepareStatement("select term from term where term=?;");
-				pstmt.setString(1, rt);
-				rs = pstmt.executeQuery();
-				if(rt.equals(rs)) {
-					pstmt = conn.prepareStatement("delete from req where reqterm=?;");
-					pstmt.setString(1, rt);
-				}
-				
+			try {
+				conn.close();
+			}catch(Exception e) {
+				System.out.print("stmt close error"+e);
 			}
-
-		}catch (Exception e) 
-		{
-			System.out.print("Req Update Error"+e);
-		}finally {
-			close(conn, pstmt, rs);
 		}
 	}
 	
+	// 메인화면에 보이는 용어 리스트
 	public ArrayList<Term> mainTermlist() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -132,6 +109,7 @@ public class termDAO {
 		return main;
 	}
 	
+	// 로그인
 	public boolean memberLogin(String id, String pwd) {
 		boolean result = false;
 		Connection conn = null;
@@ -162,6 +140,7 @@ public class termDAO {
 		return result;
 	}
 	
+	// 회원가입
 	public void memberJoin(Member member) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -169,12 +148,13 @@ public class termDAO {
 		try
 		{
 			conn = connect();
-			pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?);");
+			pstmt = conn.prepareStatement("insert into member values(?,?,?,?,?,?);");
 			pstmt.setString(1, member.getId());
 			pstmt.setString(2, member.getPwd());
 			pstmt.setString(3, member.getName());
 			pstmt.setString(4, member.getTel());
 			pstmt.setString(5, member.getEmail());
+			pstmt.setString(6, member.getMailing());
 			pstmt.executeUpdate();
 		}catch (Exception e) 
 		{
@@ -184,6 +164,7 @@ public class termDAO {
 		}
 	}
 	
+	// 회원 정보 수정
 	public void memberUpdate(Member member) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -207,6 +188,7 @@ public class termDAO {
 		
 	}
 	
+	// myinfo.jsp에 회원 정보 셋팅
 	public Member meminfo(String sessionId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -238,7 +220,8 @@ public class termDAO {
 		}
 		return meminfo;
 	}
-
+	
+	// 모든 용어 리스트
 	public ArrayList<Term> termListAll() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -271,6 +254,7 @@ public class termDAO {
 		return all;
 	}
 	
+	// 용어 상세보기
 	public Term terms(String term) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -298,6 +282,7 @@ public class termDAO {
 		return terms;
 	}
 	
+	// 보관함에 존재하는지 확인
 	public boolean ynTerm(Storage yn) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -326,6 +311,7 @@ public class termDAO {
 		
 	}
 	
+	// 보관함에 저장
 	public boolean storeTerm(Storage store) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -348,7 +334,7 @@ public class termDAO {
 		return result;
 	}
 	
-	
+	// 보관함에 저장 취소
 	public void cancleTerm(Storage cancle) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -368,6 +354,7 @@ public class termDAO {
 		}
 	}
 	
+	// 회원이 보관함에 저장한 용어 리스트
 	public ArrayList<Term> storage(String sessionId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -404,6 +391,7 @@ public class termDAO {
 		return myst;
 	}
 	
+	// 용어 검색
 	public ArrayList<Term> researchTerms(String researchTerm){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -436,6 +424,8 @@ public class termDAO {
 		}
 		return rterms;
 	}
+	
+	// 용어 등록
 	public void enrollTerm(Term eterm) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -456,6 +446,8 @@ public class termDAO {
 			close(conn, pstmt);
 		}
 	}
+	
+	// 회원의 용어 정의 요청 리스트 
 	public ArrayList<Request> myreq(String sessionId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -485,6 +477,7 @@ public class termDAO {
 		return myreq;
 	}
 	
+	// 모든 용어 정의 요청 리스트
 	public ArrayList<Request> allreq() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -495,8 +488,7 @@ public class termDAO {
 		try
 		{
 			conn = connect();
-			reqUpdate();
-			pstmt = conn.prepareStatement("select * from req;");
+			pstmt = conn.prepareStatement("select reqid, reqmem, reqterm, reqdate from req;");
 			rs = pstmt.executeQuery();
 			while (rs.next()) 
 			{
@@ -514,6 +506,257 @@ public class termDAO {
 			close(conn, pstmt, rs);
 		}
 		return allreq;
+	}
+	
+	// 회원 요청 리스트에서 요청 용어 삭제
+	public void reqDelete(String reqmem, String reqterm)
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("delete from req where reqmem=? and reqterm=?;");
+			pstmt.setString(1, reqmem);
+			pstmt.setString(2, reqterm);
+			pstmt.executeUpdate();
+		}catch (Exception e) 
+		{
+			System.out.print("Req Delete Error: "+e);
+		}finally {
+			close(conn, pstmt);
+		}	
+	}
+	
+	public void plusreq(Request req) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("insert into req(reqmem, reqterm) values(?,?);");
+			pstmt.setString(1, req.getReqmem());
+			pstmt.setString(2, req.getReqterm());
+			pstmt.executeUpdate();
+		}catch (Exception e) 
+		{
+			System.out.print("Plus Req Error: "+e);
+		}finally {
+			close(conn, pstmt);
+		}
+	}
+	// 용어 요청 리스트 정리
+	public void reqUpdate(String term) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("delete from req where reqterm=?;");
+			pstmt.setString(1, term);
+			pstmt.executeUpdate();
+		}catch (Exception e) 
+		{
+			System.out.print("Req Update Error: "+e);
+		}finally {
+			close(conn, pstmt);
+		}
+		
+		Statement stmt = null;
+		try
+		{
+			conn = connect();
+			stmt = conn.createStatement();
+			stmt.executeUpdate("set @cnt = 0;");
+			stmt.executeUpdate("update req set reqid = @cnt:= @cnt + 1;");
+			stmt.executeUpdate("alter table req auto_increment=1;");
+		}catch (Exception e) 
+		{
+			System.out.print("Req Sort Error: "+e);
+		}finally {
+			close(conn, pstmt, stmt);
+		}
+	}
+	
+	// 회원이 등록한 용어 리스트
+	public ArrayList<Term> myenroll(String sessionId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Term term = null;
+		ArrayList<Term> myenroll = new ArrayList<Term>();
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("select term, termcate, termdate, termhits, termcon from term where termmem=?;");
+			pstmt.setString(1, sessionId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) 
+			{
+				term = new Term();
+				term.setTerm(rs.getString(1));
+				term.setTermcate(rs.getString(2));
+				term.setTermdate(rs.getString(3));
+				term.setTermhits(rs.getInt(4));
+				term.setTermcon(rs.getString(5));
+				myenroll.add(term);
+			}
+		}catch (Exception e) 
+		{
+			System.out.print("My Enroll List Error"+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return myenroll;
+	}
+	
+	// 용어 수정
+	public void termupdate(Term u) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("update term set termcon=?, termcate=? where term=?;");
+			pstmt.setString(1, u.getTermcon());
+			pstmt.setString(2, u.getTermcate());
+			pstmt.setString(3, u.getTerm());
+			pstmt.executeUpdate();
+		}catch(Exception e)
+		{
+			System.out.print("Term Update Error"+e);
+		}finally {
+			close(conn, pstmt);
+		}
+	}
+	
+	//아이디 찾기
+	public String findId(String fid_tel, String fid_mail) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String findId = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("select id from member where tel=? and email=?");
+			pstmt.setString(1, fid_tel);
+			pstmt.setString(2, fid_mail);
+			rs = pstmt.executeQuery();
+			while (rs.next()) 
+			{
+				findId = rs.getString(1);
+			}
+		}catch (Exception e) 
+		{
+			System.out.print("Find ID Error"+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return findId;
+	}
+	
+	// 비밀번호 찾기
+	public String findPwd(String fpwd_id, String fpwd_mail) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String findPwd = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("select pwd from member where id=? and email=?");
+			pstmt.setString(1, fpwd_id);
+			pstmt.setString(2, fpwd_mail);
+			rs = pstmt.executeQuery();
+			while (rs.next()) 
+			{
+				findPwd = rs.getString(1);
+			}
+		}catch (Exception e) 
+		{
+			System.out.print("Find Pwd Error"+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return findPwd;
+	}
+	
+	// 조회수 증가
+	public void plusHits(String term) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("update term set termhits=termhits+1 where term=?;");
+			pstmt.setString(1, term);
+			pstmt.executeUpdate();
+		}catch(Exception e)
+		{
+			System.out.print("Plus TermHits Error"+e);
+		}finally {
+			close(conn, pstmt);
+		}
+	}
+	
+	// 모든 회원리스트_관리자
+	public ArrayList<Member> memListAll() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		ArrayList<Member> allmems = new ArrayList<Member>();
+		
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("select * from member;");
+			rs = pstmt.executeQuery();
+			while (rs.next()) 
+			{
+				m = new Member();
+				m.setId(rs.getString(1));
+				m.setName(rs.getString(3));
+				m.setTel(rs.getString(4));
+				m.setEmail(rs.getString(5));
+				m.setMailing(rs.getString(6));
+				allmems.add(m);
+			}
+		}catch (Exception e) 
+		{
+			System.out.print("Member list All Error"+e);
+		}finally {
+			close(conn, pstmt, rs);
+		}
+		return allmems;
+	}
+	
+	// 용어 삭제_관리자
+	public void termDelete(String term) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try
+		{
+			conn = connect();
+			pstmt = conn.prepareStatement("delete from term where term=?;");
+			pstmt.setString(1, term);
+			pstmt.executeUpdate();
+		}catch (Exception e) 
+		{
+			System.out.print("Term Delete Error: "+e);
+		}finally {
+			close(conn, pstmt);
+		}
 	}
 	
 }

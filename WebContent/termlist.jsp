@@ -10,7 +10,7 @@
     <title>PT-Programing Term</title>
 </head>
 <body>
-    <div id="wrap">
+<div id="wrap">
     	<%@ include file="/header.jsp" %>
 
         <div class="contents">
@@ -34,17 +34,17 @@
 						 	<input type="hidden" name="term" value="<%=term.getTerm() %>">
 						 	<td><%= i+1%></td>
 						 	<td><input id="" type="submit" name="term" value="<%=term.getTerm() %>"/></td>
-							<td><input id="" type="submit" name="term" value="<%=term.getTermcate() %>"/></td>
+							<td><%=term.getTermcate() %></td>
 							<td><%=term.getTermdate() %></td>
 							<td><%=term.getTermhits() %></td>
 							<td><%=term.getTermmem() %></td>
 					</form></tr>
 				<% }
-		} else out.print("<h3>Error</h3>");%>
+		} else out.print("<h3>용어 없음</h3>");%>
         </table>
           	</div>
-        
+        </div>
         <%@ include file="/footer.jsp" %>
-    </div>
+</div>
 </body>
 </html>

@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cs.term.service.termService;
-import cs.term.vo.Storage;
-import cs.term.vo.Term;
 
-public class ConnectController implements Controller {
+public class ReqDeleteController implements Controller {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -18,22 +16,9 @@ public class ConnectController implements Controller {
 		String sessionId = (String)request.getSession().getAttribute("sessionId");
 		
 		termService s = termService.getInstance();
-		s.plusHits(term);
-		Term terms = s.terms(term);
+		s.reqDelete(sessionId,term);
 		
-		Storage yn = new Storage();
-		yn.setStmem(sessionId);
-		yn.setStterm(term);
-		boolean r = s.ynTerm(yn);
-		String rr = null;
-		if(r == true) {
-			rr = "존재";
-			request.setAttribute("rr", rr);
-		}
-		
-		request.setAttribute("term", term);
-		request.setAttribute("terms", terms);
-		HttpUtil.forward(request, response, "/detailterm.jsp");
+		HttpUtil.forward(request, response, "/request.do");
 	}
 
 }

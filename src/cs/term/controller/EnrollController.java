@@ -12,7 +12,8 @@ import cs.term.vo.Term;
 public class EnrollController implements Controller {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void execute(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		String mem = (String)request.getSession().getAttribute("sessionId");
 		String term = request.getParameter("term");
 		String con = request.getParameter("con");
@@ -26,8 +27,10 @@ public class EnrollController implements Controller {
 		
 		termService s = termService.getInstance();
 		s.enrollTerm(eterm);
+		s.reqUpdate(term);
+		
 		request.setAttribute("result", "용어 등록 성공");
-		request.setAttribute("msg", "["+term+"] 등록에 성공했습니다. 내가 직접 등록한 용어들은 MY에서도 볼 수 있습니다.");
+		request.setAttribute("msg", "내가 직접 등록한 용어들은 MY에서도 볼 수 있습니다.");
 		
 		HttpUtil.forward(request, response, "/termResult/enrollSuccess.jsp");
 

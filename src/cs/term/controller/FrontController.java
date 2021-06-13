@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class FrontController extends HttpServlet{
 	HashMap<String, Controller> map = null;
@@ -25,12 +24,18 @@ public class FrontController extends HttpServlet{
 		map.put("/request.do", new RequestController());
 		map.put("/research.do", new ResearchController());
 		map.put("/enroll.do", new EnrollController());
+		map.put("/reqdelete.do", new ReqDeleteController());
+		map.put("/plusreq.do", new PlusReqController());
+		map.put("/termupdate.do", new TermUpdateController());
+		map.put("/termdelete.do", new TermDeleteController());
 		
 		// member
 		map.put("/login.do", new LoginController());
 		map.put("/join.do", new JoinController());
 		map.put("/update.do", new UpdateController());
 		map.put("/myinfo.do", new MyInfoController());
+		map.put("/findinfo.do", new FindInfoController());
+		map.put("/manager.do", new ManagerController());
 	}
 	
 	@Override

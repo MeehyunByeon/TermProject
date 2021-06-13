@@ -23,7 +23,7 @@ public class RequestController implements Controller {
 
 		if(sessionId==null)
 		{
-			request.setAttribute("reqresult", "요청한 목록이 없습니다.");
+			request.setAttribute("reqresult", "요청 목록이 없습니다.");
 			request.setAttribute("reqmsg", "요청 기능을 사용하려면 로그인 또는 회원가입을 해주세요.");
 		}
 		else{

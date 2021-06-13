@@ -40,13 +40,11 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
 
 #wrap {
     width: 1400px;
-   	height: 100px;
  	margin: 0 auto; 
     color: #222;
     background-color: #DAE3F3;
     text-align:center;
 }
-
 
 /*seeTerm*/
 #researchText{
@@ -150,10 +148,10 @@ article{
   display: block;
   font-size: 15px;
   letter-spacing: 1px;
-  margin: 15px auto;
-  padding: 5px 15px;
+  margin: 5px auto;
+  padding: 0px 15px;
   width: 180px;
-  height: 50px;
+  height: 45px;
 }
 #inst input[type=submit]:hover { 
   background-color:#8FAADC;
@@ -235,6 +233,7 @@ article{
       font-size: 18px;
       line-height:30px;
    padding-top: 20px;
+   resize: none;
 }
 
 
@@ -247,7 +246,8 @@ article{
       overflow:auto;
       font-size: 18px;
       line-height:30px;
-   padding-top: 30px;
+   padding: 30px;
+   resize: none;
 }
 
 .contents textarea:focus {
@@ -257,22 +257,23 @@ article{
 #listWrapper{
 	  float:left;
       width:1354px;
-      height:750px; 
+      height:580px; 
       margin: 0px 10px 25px;
       padding:10px; 
-      /*border:3px solid #DAE3F3;*/
       border-radius: 5px;
+      overflow: auto;
+      scrollbar-face-color:#8FAADC;
+      scrollbar-track-color:#DAE3F3;
 }
 #listWrapper h1{
 	margin-left: 75px;
 }
 
 #table {
-	width: 1350px;
-	height: auto;
+	width: 1340px;
+	height: 550px auto;
 	margin-top :0px;
 	border: 2px solid #DAE3F3;
-	overflow: auto;
 }
 
 #table tr{
@@ -301,11 +302,9 @@ article{
 
 #table > tr > td > input[type=submit]:first-child{
 	width:5%;
-	padding: 50px;
 }
 #table > tr > td:first-child +td{
 	width:25%;
-	padding: 30%;
 } 
 #table > tr > td:first-child +td+td{
 	width:20%;
@@ -321,25 +320,35 @@ article{
 }
 
 #req_L{
-	border:3px solid black;
+	border:3px solid #DAE3F3;
 	 float:left;
       width:650px;
-      height:700px; 
+      height: 700px; 
       margin: 10px;
       padding:10px; 
       border-radius: 5px;
+      overflow: auto;
+      scrollbar-face-color:#8FAADC;
+      scrollbar-track-color:#DAE3F3;
 }
-#req_R_top{
-	border:3px solid pink;
+#req_R_bottom{
+	border:3px solid #DAE3F3;
 	float:right;
       width:650px;
       height:550px; 
       margin: 10px;
       padding:10px; 
       border-radius: 5px;
+      overflow: auto;
+    scrollbar-face-color:#8FAADC;
+    scrollbar-track-color:#DAE3F3;
 }
-#req_R_bottom{
-	border:3px solid yellow;
+#req_R_bottom h2{
+	margin-left: -20px;
+}
+
+#req_R_top{
+	border:3px solid #DAE3F3;
 	float:right;
       width:650px;
       height:100px; 
@@ -347,13 +356,39 @@ article{
       padding:10px; 
       border-radius: 5px;
 }
+#req_R_top h2{
+	margin-left: -20px;
+	margin-bottom: 10px;
+}
+
+#req_R_top input[type=text]{
+  width: 400px;
+  height: 40px;
+  border: 3px solid #DAE3F3;
+  border-radius: 5px;
+}
+
+#req_R_top input[type=submit]{
+  width: 90px;
+  height: 46px;
+  color: black;
+  border: none;
+  background-color: #DAE3F3;
+  margin-left: 30px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+#req_R_top input[type=submit]:hover {
+  background-color:#8FAADC;
+  color:white;
+}
 
 #table_req {
-	width: 650px;
-	height: auto;
+	width: 630px;
+	height: 550px auto;
 	margin-top :0px;
 	border: 2px solid #DAE3F3;
-	overflow: auto;
 }
 #table_req caption{
 	font-size: 20px;

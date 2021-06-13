@@ -10,7 +10,7 @@
     <title>PT-Programing Term</title>
 </head>
 <body>
-    <div id="wrap">
+<div id="wrap">
     	<%@ include file="/header.jsp" %>
 		
 		<div class="contents">
@@ -22,7 +22,7 @@
 			<div id="listWrapper">
 				<h1>보관함</h1>
 				<table id="table">
-          				<tr><th>번호</th><th>용어</th><th>카테고리</th><th>날짜</th><th>조회수</th><th>등록자</th></tr>
+          				<tr><th>번호</th><th>용어</th><th>카테고리</th><th>저장 날짜</th><th>조회수</th><th>등록자</th></tr>
 				<% for(i = 0; i < myst.size(); i++){
 					Term t = myst.get(i);	%>
 					<tr><form action="connect.do" method="put">
@@ -35,12 +35,13 @@
 							<td><%=t.getTermmem() %></td>
 					</form></tr>
 				<% }
-		} else out.print("<h3>Error</h3>");%>
+		} else out.print("<br><br><h3>보관함이 비어있음</h3>");%>
         </table>
           	</div>
         
        <%@ include file="/footer.jsp" %>
 
     </div>
+</div>
 </body>
 </html>

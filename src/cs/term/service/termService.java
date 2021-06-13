@@ -81,4 +81,45 @@ public class termService {
 		return dao.allreq();
 	}
 
+	public void reqDelete(String reqmem, String reqterm) {
+		dao.reqDelete(reqmem, reqterm);
+	}
+	
+	public void plusreq(Request req) {
+		dao.plusreq(req);
+	}
+
+	public void reqUpdate(String term) {
+		dao.reqUpdate(term);
+	}
+
+	public ArrayList<Term> myenroll(String sessionId) {
+		return dao.myenroll(sessionId);
+	}
+
+	public void termupdate(Term u) {
+		dao.termupdate(u);
+	}
+
+	public String findId(String fid_tel, String fid_mail) {
+		String findId = dao.findId(fid_tel, fid_mail);
+		return findId;
+	}
+	public String findPwd(String fpwd_id, String fpwd_mail) {
+		String findPwd = dao.findId(fpwd_id, fpwd_mail);
+		return findPwd;
+	}
+
+	public void plusHits(String term) {
+		dao.plusHits(term);
+	}
+
+	public ArrayList<Member> memListAll() {
+		return dao.memListAll();
+	}
+
+	public void termDelete(String term) {
+		dao.termDelete(term);
+	}
+
 }

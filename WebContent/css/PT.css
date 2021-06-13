@@ -39,23 +39,23 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
 	color:#DAE3F3;
 }
 
-#wrap {
+#wrap{
     width: 1400px;
-   	height: 100px;
  	margin: 0 auto; 
     color: #222;
     background-color: #DAE3F3;
-    text-align: center;
+    text-align:center;
 }
 
 #header {
-	width: 1400px; 
+	width: 1300px; 
 	height: 100px; 
 	line-height: 50px; 
-	color: #DAE3F3;
-	background-color: #DAE3F3;
+	background-color: white;
+	margin: 0 auto;
 	margin-top: 30px;
 	text-align: center;
+	border-radius: 3px;
 }
 
 
@@ -145,6 +145,18 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
 #contents h1 {
   margin: 40px;
 }
+
+article{
+      float:left;
+      width:350px;
+      height:300px; 
+      margin:25px 45px 25px;
+      padding:10px; 
+      border:3px solid #DAE3F3;
+      border-radius: 5px;
+      text-align: center;
+}
+
 article a{
   font-size: 25px;
 }
@@ -157,17 +169,6 @@ article textarea{
 }
 article textarea:focus {
  outline: none;
-}
-
-article{
-      float:left;
-      width:350px;
-      height:300px; 
-      margin:25px 45px 25px;
-      padding:10px; 
-      border:3px solid #DAE3F3;
-      border-radius: 5px;
-      text-align: center;
 }
 
 #maints{

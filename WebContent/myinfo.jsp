@@ -1,3 +1,5 @@
+<%@page import="cs.term.vo.Term"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="cs.term.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,14 +8,32 @@
 <head>
 	<meta charset="UTF-8">
   	<link rel="stylesheet" href="css/login_join.css">
-    <title>PT-Programing Term</title>
+ <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+    var checkUnload = true;
+    $(window).on("beforeunload", function(){
+        if(checkUnload) return alert("관리자 페이지로 이동하시겠습니까?");
+    });
+    $("#enroll").on("click", function(){
+        checkUnload = false;
+        $("#enroll").submit();
+    });
+</script>
+  	
+    <title>PT-My Information</title>
 </head>
 <body>
     <div id="wrap">
     	<%@ include file="/header.jsp" %>
-    	
+    	<%
+    	ArrayList<Term> myenroll = (ArrayList<Term>)request.getAttribute("myenroll");
+      	request.setAttribute("myenroll", myenroll);
+      	String myenrollresult = (String)request.getAttribute("myenrollresult");
+      	String myenrollmsg = (String)request.getAttribute("myenrollmsg");
+      	%>
+      	
    	<div id="contents">
-      <section>
+      <section id="myinfo">
       <form id="join" action="update.do" method="post">
         <fieldset>MY</fieldset>
       	<fieldset>
@@ -47,12 +67,41 @@
         	<form action="logout.jsp" method="put">
         		<input type="submit" value="로그아웃">
         	</form>
+        	<% if(sessionId.equals("manager")){%>
+        	<form id="manager" action="manager.do" method="put">
+        		<input name="manager" type="submit" value="관리자">
+        	</form>
+        	<%} %>
       	</fieldset>
       </section>
-    </div>
-        
-       <%@ include file="/footer.jsp" %>
-
+    
+    <div id="myenroll">
+        <%
+		if(myenrollresult == null) { %>
+				<table id="table_myenroll">
+				<caption>내가 등록한 용어 목록</caption>
+          				<tr><th>번호</th><th>용어</th><th>카테고리</th><th>등록 날짜</th><th>조회수</th><th>수정</th></tr>
+				<% for(int i = 0; i < myenroll.size(); i++){
+					Term t = myenroll.get(i);	%>
+					<tr><form action="termUpdate.jsp" method="put">
+						 	<input type="hidden" name="term" value="<%=t.getTerm() %>">
+						 	<input type="hidden" name="con" value="<%=t.getTermcon() %>">
+						 	<td><%= i+1%></td>
+						 	<td><%=t.getTerm() %></td>
+						 	<td><%=t.getTermcate() %></td>
+						 	<td><%=t.getTermdate() %></td>
+						 	<td><%=t.getTermhits() %></td>
+						 	<td><input type="submit" name="update" value="수정"/></td>
+					</form></tr>
+				<% }
+		}else{%>
+				<h2><%= myenrollresult%></h2>
+				<h3><%= myenrollmsg%></h3>
+		<% }%>
+		</table>
+     </div>
+     </div>
+    <%@ include file="/footer.jsp" %>
     </div>
 </body>
 </html>
