@@ -3,9 +3,11 @@
   ## 1. 프로젝트 설명
   * 프로젝트 주제
     - 프로그래밍 용어의 이해를 돕는 웹서비스
+  
   * 프로젝트 목적
     - 컴퓨터 분야를 전공으로 하는 학생들이 전공 지식을 확실히 이해하고 실력을 향상하는 데 도움이 되기 위해
     - 회원들의 용어 등록 시스템을 통해 지식 공유의 환경을 제공하기 위해
+  
   -----------------------------------------------
   ## 2. 프로젝트 기능
   ### 회원
@@ -20,7 +22,7 @@
   1. 회원의 모든 기능
   2. 모든 용어 수정 및 삭제 가능
   3. 모든 회원 리스트 확인
-  
+  -------------------------------
   ## 3. 폴더 구조
   > Java Resources
   >> src
@@ -61,46 +63,20 @@
   >>>> * termService.java
   
   >>> cs.term.vo
-  >>>> * Member.java
-  >>>> * Request.java
-  >>>> * Storage.java
-  >>>> * Term.java
+  >>>> * Member.java -> 회원
+  >>>> * Request.java -> 요청
+  >>>> * Storage.java -> 저장
+  >>>> * Term.java -> 용어
   
   > WebContent
   >> css
-  >>> '페이지를 새로 만들 필요성을 못 느낀 경우 css 파일명과 관련 없이 사용'
-  >>> * login_join.css -> 로그인&회원가입과 관련된 페이지에 사용된 CSS
-  >>> * PT.css -> 기본적인 틀 CSS
-  >>> * term_req_st.css -> 용어&요청&보관함과 관련된 페이지에 사용된 CSS
+  >>> 하나의 css 파일에 모든 것을 담기에는 수정 및 추가가 어려워 3개의 css 파일로 나누어 개발했다. 보통 css 파일명과 관련된 jsp에 사용했지만, 새로 만들 필요성을 못 느낀 경우 css 파일명과 관련 없이 사용하였다.
   
   >> termResult
-  >>> * joinsuccess.jsp -> 
-  >>> * enrollSuccess.jsp -> 
-  >>> * storeSuccess.jsp -> 
-  >>> * updateSuccess.jsp -> 
-  >>> * findInfo.jsp -> 
-  >>> * searchResult.jsp -> 
-  >>> * loginfail.jsp -> 
-  >>> * storeFail.jsp -> 
-  >>> * toStorageFail.jsp -> 
+  >>> 보관함 저장 이후, 아이디나 비밀번호 찾기 성공 및 실패 등 간단한 정보를 알려주고 다른 페이지로의 이동을 선택할 수 있는 화면
   
   >> WEB-INF
-  >>> web.xml
+  >>> * web.xml
+  >>>> 가장 처음에 시작할 때 start.jsp가 실행되도록, .do로 끝나는 것은 FrontController로 이동하도록 설정
   
-  >> * start.jsp -> 웹서비스를 처음 시작할 때 진행
-  >> * header.jsp -> 웹서비스 헤더
-  >> * footer.jsp ->
-  >> * main.jsp ->
-  >> * login.jsp ->
-  >> * logout.jsp ->
-  >> * logout.jsp ->
-  >> * logout.jsp ->
-  >> * logout.jsp ->
-  >> * logout.jsp ->
-  >> * logout.jsp ->
-  >> * logout.jsp ->
-  >> * logout.jsp ->
-  >> * logout.jsp ->
-  >> * .jsp ->
-  >> * findIdPwd.jsp ->
   
