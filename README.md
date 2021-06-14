@@ -39,11 +39,14 @@
   >>>> * TermUpdateController.java
   >>>> * UpdateController.java
   
+  
   >>> * cs.term.dao
   >>>> * termDAO.java
   
+  
   >>> * cs.term.service
   >>>> * termService.java
+  
   
   >>> * cs.term.vo
   >>>> * Member.java
