@@ -46,7 +46,6 @@ input[type=text], input[type=password], input[type=tel], input[type=email]
     text-align:center;
 }
 
-/*seeTerm*/
 #researchText{
   width: 400px;
   height: 40px;
@@ -148,7 +147,7 @@ article{
   display: block;
   font-size: 15px;
   letter-spacing: 1px;
-  margin: 5px auto;
+  margin: 2px auto;
   padding: 0px 15px;
   width: 180px;
   height: 45px;

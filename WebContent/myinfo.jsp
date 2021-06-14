@@ -8,19 +8,7 @@
 <head>
 	<meta charset="UTF-8">
   	<link rel="stylesheet" href="css/login_join.css">
- <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
-    <script>
-    var checkUnload = true;
-    $(window).on("beforeunload", function(){
-        if(checkUnload) return alert("관리자 페이지로 이동하시겠습니까?");
-    });
-    $("#enroll").on("click", function(){
-        checkUnload = false;
-        $("#enroll").submit();
-    });
-</script>
-  	
-    <title>PT-My Information</title>
+    <title>PT - My Information</title>
 </head>
 <body>
     <div id="wrap">
@@ -76,23 +64,27 @@
       </section>
     
     <div id="myenroll">
-        <%
-		if(myenrollresult == null) { %>
-				<table id="table_myenroll">
+     	<% if(myenrollresult == null) { %>
+			<table id="table_myenroll">
 				<caption>내가 등록한 용어 목록</caption>
-          				<tr><th>번호</th><th>용어</th><th>카테고리</th><th>등록 날짜</th><th>조회수</th><th>수정</th></tr>
+          				<tr><th>번호</th><th>용어</th><th>카테고리</th><th>등록 날짜</th><th>조회수</th><th>수정</th><th>삭제</th></tr>
 				<% for(int i = 0; i < myenroll.size(); i++){
 					Term t = myenroll.get(i);	%>
 					<tr><form action="termUpdate.jsp" method="put">
-						 	<input type="hidden" name="term" value="<%=t.getTerm() %>">
-						 	<input type="hidden" name="con" value="<%=t.getTermcon() %>">
+							<input type="hidden" name="term" value="<%=t.getTerm() %>">
+							<%request.setAttribute("term", t.getTerm()); %>
+							<input type="hidden" name="con" value="<%=t.getTermcon() %>">
 						 	<td><%= i+1%></td>
 						 	<td><%=t.getTerm() %></td>
 						 	<td><%=t.getTermcate() %></td>
 						 	<td><%=t.getTermdate() %></td>
 						 	<td><%=t.getTermhits() %></td>
 						 	<td><input type="submit" name="update" value="수정"/></td>
-					</form></tr>
+					</form>
+					 <form id="termdelete" action="termdelete.do" method="put">
+						 	<input type="hidden" name="term" value="<%=t.getTerm() %>">
+						 	<td><input type="submit" name="delete" value="삭제" /></td>
+						</form></tr>
 				<% }
 		}else{%>
 				<h2><%= myenrollresult%></h2>

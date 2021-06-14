@@ -15,6 +15,7 @@ public class Term {
 	public String getTermmem() {
 		return termmem;
 	}
+	
 	public void setTermmem(String termmem) {
 		this.termmem = termmem;
 	}
@@ -54,6 +55,7 @@ public class Term {
 	public int getTermhits() {
 		return termhits;
 	}
+	
 	public void setTermhits(int termhits) {
 		this.termhits = termhits;
 	}

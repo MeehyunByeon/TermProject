@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
     <link rel="stylesheet" href="css/term_req_st.css">
-    <title>PT-Programing Term</title>
+    <title>PT - Storage</title>
 </head>
 <body>
 <div id="wrap">
@@ -38,10 +38,9 @@
 		} else out.print("<br><br><h3>보관함이 비어있음</h3>");%>
         </table>
           	</div>
-        
+         </div>
        <%@ include file="/footer.jsp" %>
 
-    </div>
 </div>
 </body>
 </html>

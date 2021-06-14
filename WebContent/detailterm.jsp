@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
     <link rel="stylesheet" href="css/term_req_st.css">
-    <title>PT-Programing Term</title>
+    <title>PT - Detail Term</title>
 </head>
 <body>
 	<%	

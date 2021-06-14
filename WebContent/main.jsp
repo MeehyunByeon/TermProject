@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
     <link rel="stylesheet" href="css/PT.css">
-    <title>PT-Programing Term</title>
+    <title>PT - Programing Term</title>
 </head>
 <body>
     <div id="wrap"> <%@ include file="/header.jsp" %>

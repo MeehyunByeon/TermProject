@@ -8,8 +8,7 @@
 <head>
 	<meta charset="UTF-8">
   	<link rel="stylesheet" href="css/login_join.css">
-
-<title>PT-Manager</title>
+<title>PT - Manager</title>
 </head>
 <body>
     <div id="wrap">
@@ -41,7 +40,7 @@
 						</form>
 						 <form id="termdelete" action="termdelete.do" method="put">
 						 	<input type="hidden" name="term" value="<%=t.getTerm() %>">
-						 	<td><input type="submit" name="delete" value="삭제" onclick=send(this.form)/></td>
+						 	<td><input type="submit" name="delete" value="삭제" /></td>
 						</form></tr>
 		<%} }else{%>
 				<h2>용어 목록 없음</h2>

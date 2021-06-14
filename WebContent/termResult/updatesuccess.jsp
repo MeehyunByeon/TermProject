@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/login_join.css">
-<title>Insert title here</title>
+<title>PT - Member Update Success</title>
 </head>
 <body>
 <div id="wrap"> 

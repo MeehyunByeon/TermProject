@@ -36,6 +36,7 @@ public class FindInfoController implements Controller {
 			String fpwd_mail = request.getParameter("fpwd_mail");
 			fpwd = s.findPwd(fpwd_id, fpwd_mail);
 			if(fpwd != null) find = true;
+			System.out.println(fpwd);
 		}
 		
 		if(find) {

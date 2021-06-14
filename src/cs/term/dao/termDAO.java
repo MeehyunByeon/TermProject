@@ -80,7 +80,7 @@ public class termDAO {
 		}
 	}
 	
-	// 메인화면에 보이는 용어 리스트
+	// 메인화면 용어 리스트
 	public ArrayList<Term> mainTermlist() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -402,8 +402,11 @@ public class termDAO {
 		try
 		{
 			conn = connect();
-			pstmt = conn.prepareStatement("select * from term where term=? or term like '%?%' or term like '?%' or term like '%?';");
+			pstmt = conn.prepareStatement("select * from term where term=? or term like ? or term like ? or term like ?;");
 			pstmt.setString(1, researchTerm);
+			pstmt.setString(2, "%"+researchTerm+"%");
+			pstmt.setString(3, "%"+researchTerm);
+			pstmt.setString(4, researchTerm+"%");
 			rs = pstmt.executeQuery();
 			while (rs.next()) 
 			{
@@ -529,6 +532,7 @@ public class termDAO {
 		}	
 	}
 	
+	// 용어 정의 요청
 	public void plusreq(Request req) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -547,6 +551,7 @@ public class termDAO {
 			close(conn, pstmt);
 		}
 	}
+	
 	// 용어 요청 리스트 정리
 	public void reqUpdate(String term) {
 		Connection conn = null;
@@ -668,14 +673,14 @@ public class termDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String findPwd = null;
-		
 		try
 		{
 			conn = connect();
-			pstmt = conn.prepareStatement("select pwd from member where id=? and email=?");
+			pstmt = conn.prepareStatement("select pwd from member where id=? and email=?;");
 			pstmt.setString(1, fpwd_id);
 			pstmt.setString(2, fpwd_mail);
 			rs = pstmt.executeQuery();
+			
 			while (rs.next()) 
 			{
 				findPwd = rs.getString(1);
@@ -740,7 +745,7 @@ public class termDAO {
 		return allmems;
 	}
 	
-	// 용어 삭제_관리자
+	// 용어 삭제
 	public void termDelete(String term) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

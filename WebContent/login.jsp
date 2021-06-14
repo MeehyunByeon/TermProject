@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
     <link rel="stylesheet" href="css/login_join.css">
-    <title>PT-Programing Term</title>
+    <title>PT - LogOut</title>
 </head>
 <body>
     <div id="wrap">
