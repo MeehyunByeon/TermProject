@@ -16,9 +16,9 @@
   ## 3. 폴더 구조
   > Java Resources
   >> src
-  >>> cs.term.controller
-  >>> cs.term.dao
-  >>> cs.term.service
-  >>> cs.term.vo
+  >>> * cs.term.controller
+  >>> * cs.term.dao
+  >>> * cs.term.service
+  >>> * cs.term.vo
   
         
