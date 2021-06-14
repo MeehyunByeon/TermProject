@@ -14,11 +14,11 @@
   ### 관리자
   
   ## 3. 폴더 구조
-  * Java Resources
-  * src
-  * cs.term.controller
-  * cs.term.dao
-  * cs.term.service
-  * cs.term.vo
+  > Java Resources
+  >> src
+  >>> cs.term.controller
+  >>> cs.term.dao
+  >>> cs.term.service
+  >>> cs.term.vo
   
         
