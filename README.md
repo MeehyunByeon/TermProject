@@ -16,7 +16,7 @@
   ## 3. 폴더 구조
   > Java Resources
   >> src
-  >>> * cs.term.controller
+  >>> cs.term.controller
   >>>> * AlltermController.java
   >>>> * ConnectController.java
   >>>> * Controller.java
@@ -40,15 +40,15 @@
   >>>> * UpdateController.java
   
   
-  >>> * cs.term.dao
+  >>> cs.term.dao
   >>>> * termDAO.java
   
   
-  >>> * cs.term.service
+  >>> cs.term.service
   >>>> * termService.java
   
   
-  >>> * cs.term.vo
+  >>> cs.term.vo
   >>>> * Member.java
   >>>> * Request.java
   >>>> * Storage.java
