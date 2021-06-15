@@ -91,6 +91,9 @@
   >> WEB-INF
   >>> * web.xml
   >>>> 가장 처음에 시작할 때 start.jsp가 실행되도록, .do로 끝나는 모든 것은 FrontController로 이동하도록 설정
+  >>>> * PT.css -> 웹서비스 기본 양식과 메인화면에 적용되는 CSS
+  >>>> * term_req_st.css -> 용어, 요청, 보관함 관련 jsp에 적용되는 CSS
+  >>>> * login_join.css -> 로그인, 회원가입 등 회원 관련 jsp에 적용되는 CSS
   
   >> * start.jsp -> 웹서비스를 가장 처음 시작할 때 한번 만 실행
   >> * header.jsp -> 웹서비스 헤더
