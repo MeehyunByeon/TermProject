@@ -173,11 +173,11 @@ public class termDAO {
 		{
 			conn = connect();
 			pstmt = conn.prepareStatement("update member set pwd=?, name=?, tel=?, email=? where id=?;");
-			pstmt.setString(5, member.getId());
 			pstmt.setString(1, member.getPwd());
 			pstmt.setString(2, member.getName());
 			pstmt.setString(3, member.getTel());
 			pstmt.setString(4, member.getEmail());
+			pstmt.setString(5, member.getId());
 			pstmt.executeUpdate();
 		}catch(Exception e)
 		{

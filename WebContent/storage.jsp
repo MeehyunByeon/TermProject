@@ -29,7 +29,7 @@
 						 	<input type="hidden" name="term" value="<%=t.getTerm() %>">
 						 	<td><%= i+1%></td>
 						 	<td><input type="submit" name="term" value="<%=t.getTerm() %>"/></td>
-							<td><input type="submit" name="term" value="<%=t.getTermcate() %>"/></td>
+							<td><%=t.getTermcate() %></td>
 							<td><%=t.getTermdate() %></td>
 							<td><%=t.getTermhits() %></td>
 							<td><%=t.getTermmem() %></td>

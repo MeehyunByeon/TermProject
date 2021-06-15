@@ -3,6 +3,8 @@
 <%@page import="cs.term.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<Connector connectionTimeout="20000" port="80" protocol="HTTP/1.1" redirectPort="8443" URIEncoding="utf-8" />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -44,8 +46,8 @@
             <input id="tel" name="tel" type="text" value="${memInfo.getTel()}" required placeholder="01012345678">
           </li>
           <li>
-            <label for="mail">이메일</label>
-            <input id="mail" name="mail" type="email" value="${memInfo.getEmail()}" required placeholder="abc@domain.com">
+            <label for="email">이메일</label>
+            <input id="mail" name="email" type="email" value="${memInfo.getEmail()}" required placeholder="abc@domain.com">
           </li>
         </ul>
         </fieldset>
