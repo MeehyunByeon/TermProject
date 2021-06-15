@@ -95,6 +95,7 @@
   >>>> * term_req_st.css -> 용어, 요청, 보관함 관련 jsp에 적용되는 CSS
   >>>> * login_join.css -> 로그인, 회원가입 등 회원 관련 jsp에 적용되는 CSS
   
+  >> 웹서비스 사용자의 주된 활동이 이루어지는 화면들
   >> * start.jsp -> 웹서비스를 가장 처음 시작할 때 한번 만 실행
   >> * header.jsp -> 웹서비스 헤더
   >> * footer.jsp -> 웹서비스 푸터
